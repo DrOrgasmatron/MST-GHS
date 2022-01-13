@@ -1,3 +1,5 @@
+# TO EXECUTE PROGRAM, USE run.py
+
 from . import node, edge
 import sys
 import threading
@@ -8,18 +10,6 @@ all_nodes = []
 
 
 mst = {}
-
-
-def node_go_brrrrrr(n):
-    while True:
-        ret = n.read()
-        if ret:
-            with n.lock:
-                global mst
-                for k, v in n.mst.items():
-                    if k not in mst:
-                        mst[k] = True
-            return
 
 
 def run_algorithm(filename, out=None):
@@ -52,7 +42,7 @@ def run_algorithm(filename, out=None):
     threads = []
     for i in range(len(all_nodes)):
         threads.append(threading.Thread(
-            target=node_go_brrrrrr, args=(all_nodes[i],)))
+            target=node_go, args=(all_nodes[i],)))
 
     for t in threads:
         t.start()
@@ -75,3 +65,15 @@ def run_algorithm(filename, out=None):
 
         with open(out, 'w') as f:
             f.write(s)
+
+
+def node_go(n):
+    while True:
+        ret = n.read()
+        if ret:
+            with n.lock:
+                global mst
+                for k, v in n.mst.items():
+                    if k not in mst:
+                        mst[k] = True
+            return

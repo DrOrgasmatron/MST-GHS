@@ -1,5 +1,7 @@
 # MST Exercise
 # Nicola COSI
+# THIS IS THE FILE TO EXECUTE
+# python run.py input
 
 import sys
 import os
